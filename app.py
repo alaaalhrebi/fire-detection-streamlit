@@ -5,7 +5,6 @@ from tensorflow.keras.models import load_model
 from PIL import Image
 import time
 import threading
-from playsound import playsound
 import gdown
 import os
 
