@@ -72,9 +72,24 @@ if start_camera:
     cap.release()
     uploaded_photo = st.camera_input("📷 Take a picture")
 
-if uploaded_photo is not None:
-    image = Image.open(uploaded_photo)
-    st.image(image, caption="Captured Image", use_column_width=True)
+option = st.radio("📸 Choose input method:", ["Upload Image", "Take Photo"])
+
+if option == "Upload Image":
+    uploaded_file = st.file_uploader("📤 Upload an image", type=["jpg", "jpeg", "png"])
+    image_source = uploaded_file
+
+elif option == "Take Photo":
+    uploaded_photo = st.camera_input("📷 Take a picture")
+    image_source = uploaded_photo
+
+else:
+    image_source = None
+
+
+
+if image_source is not None:
+    image = Image.open(image_source).convert('RGB')
+    st.image(image, caption='Input Image', use_column_width=True)
 
     img_resized = image.resize((224, 224))
     img_array = np.array(img_resized) / 255.0
@@ -86,4 +101,3 @@ if uploaded_photo is not None:
         st.error("🚨 FIRE DETECTED!")
     else:
         st.success("✅ No Fire Detected.")
-
