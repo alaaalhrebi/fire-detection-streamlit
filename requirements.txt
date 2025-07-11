@@ -2,5 +2,4 @@ streamlit
 tensorflow
 opencv-python-headless
 Pillow
-playsound
 gdown
