@@ -18,7 +18,7 @@ file_id = '1BO4aQ_Og1CF5OihOsAGtUsxRZMxENPCA'  # ← ضع هنا File ID الخ�
 
 if not os.path.exists(model_filename):
     with st.spinner('📥 Downloading model...'):
-        url = f'https://drive.google.com/file/d/1BO4aQ_Og1CF5OihOsAGtUsxRZMxENPCA'
+        url = f'https://drive.google.com/uc?id=1BO4aQ_Og1CF5OihOsAGtUsxRZMxENPCA'
         gdown.download(url, model_filename, quiet=False)
     st.success('✅ Model downloaded successfully!')
 
