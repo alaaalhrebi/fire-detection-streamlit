@@ -14,7 +14,7 @@ st.title("🔥 Fire Detection AI System")
 
 # تحميل النموذج من Google Drive إذا لم يكن موجودًا
 model_filename = 'fire_detection_model.h5'
-file_id = '1BO4aQ_Og1CF5OihOsAGtUsxRZMxENPCA'  # ← ضعي هنا File ID الخاص بك
+file_id = '1BO4aQ_Og1CF5OihOsAGtUsxRZMxENPCA'  # ← ضع هنا File ID الخاص بك
 
 if not os.path.exists(model_filename):
     with st.spinner('📥 Downloading model...'):
@@ -22,7 +22,7 @@ if not os.path.exists(model_filename):
         gdown.download(url, model_filename, quiet=False)
     st.success('✅ Model downloaded successfully!')
 
-# تحميل النموذج
+# تحميل النموذج مع التخزين المؤقت
 @st.cache_resource
 def load_fire_model():
     return load_model(model_filename)
@@ -30,8 +30,8 @@ def load_fire_model():
 model = load_fire_model()
 
 # دالة تشغيل صوت الإنذار
-def play_alarm():
-    playsound('alarm.mp3')
+#def play_alarm():
+ #   playsound('alarm.mp3')
 
 # زر لبدء الكاميرا
 start_camera = st.button("🚨 Start Camera Detection")
@@ -64,7 +64,7 @@ if start_camera:
         if prediction > 0.5 and not detected:
             detected = True
             status_placeholder.warning("🚨 FIRE DETECTED!")
-            threading.Thread(target=play_alarm).start()
+            #threading.Thread(target=play_alarm).start()
             break
 
         time.sleep(1)
