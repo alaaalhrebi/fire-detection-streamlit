@@ -8,11 +8,11 @@ import threading
 import gdown
 import os
 
-# إعداد الصفحة
+#  الصفحة
 st.set_page_config(page_title="🔥 Fire Detection App", layout="centered")
 st.title("🔥 Fire Detection AI System")
 
-# تحميل النموذج من Google Drive إذا لم يكن موجودًا
+# تحميل النموذج من Google Drive 
 model_filename = 'fire_detection_model.h5'
 file_id = '1CEI7wUXISLEoAfXlE2HNl23TzcqHroLe'  # ← ضع هنا File ID الخاص بك
 
@@ -29,7 +29,7 @@ def load_fire_model():
 
 model = load_fire_model()
 
-# دالة تشغيل صوت الإنذار
+#  صوت الإنذار
 #def play_alarm():
  #   playsound('alarm.mp3')
 
@@ -70,3 +70,20 @@ if start_camera:
         time.sleep(1)
 
     cap.release()
+    uploaded_photo = st.camera_input("📷 Take a picture")
+
+if uploaded_photo is not None:
+    image = Image.open(uploaded_photo)
+    st.image(image, caption="Captured Image", use_column_width=True)
+
+    img_resized = image.resize((224, 224))
+    img_array = np.array(img_resized) / 255.0
+    img_input = np.expand_dims(img_array, axis=0)
+
+    prediction = model.predict(img_input)[0][0]
+
+    if prediction > 0.5:
+        st.error("🚨 FIRE DETECTED!")
+    else:
+        st.success("✅ No Fire Detected.")
+
