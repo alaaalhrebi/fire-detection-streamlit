@@ -2,5 +2,3 @@ tensorflow==2.12.0
 streamlit
 opencv-python-headless
 Pillow
-playsound
-gdown
